@@ -131,4 +131,33 @@ describe("uniswapv2", () => {
 
     expect(Number(userXPost.amount)).to.be.lessThan(500);
   });
+  it("withdraws LP and receives tokens", async () => {
+    const amountLp = new BN(100);
+    const minX = new BN(1);
+    const minY = new BN(1);
+
+    await program.methods.withdraw(amountLp, minX, minY).accounts({
+      user: initializer.publicKey,
+      mintX: mintX,
+      mintY: mintY,
+      mintLp: mintLpPda,
+      vaultX: vaultXPda,
+      vaultY: vaultYPda,
+      userLp: userLpPda,
+      userX: userXPda,
+      userY: userYPda,
+      pool: poolPda,
+      systemProgram: SystemProgram.programId,
+      tokenProgram: anchor.utils.token.TOKEN_PROGRAM_ID,
+      associatedTokenProgram: anchor.utils.token.ASSOCIATED_PROGRAM_ID,
+    }).signers([]).rpc();
+
+    const lpFinal = await getAccount(provider.connection, userLpPda);
+    const userX = await getAccount(provider.connection, userXPda);
+    const userY = await getAccount(provider.connection, userYPda);
+
+    console.log("LP burned. Final lp amount: ", lpFinal.amount);
+    console.log("User X: ", userX.amount);
+    console.log("UserY:", userY.amount);
+  });
 });
