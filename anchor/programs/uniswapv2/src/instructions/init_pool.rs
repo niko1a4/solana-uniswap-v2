@@ -5,6 +5,7 @@ use anchor_spl::{
     token::{Mint, Token, TokenAccount},
 };
 use crate::error::PoolError;
+use crate::event::InitializePoolEvent;
 #[derive(Accounts)]
 pub struct InitializePool<'info> {
     #[account(mut)]
@@ -57,6 +58,14 @@ impl <'info> InitializePool <'info>{
             mint_y: self.mint_y.key(),
             pool_bump: bumps.pool,
             lp_bump: bumps.mint_lp,
+        });
+        emit!(InitializePoolEvent {
+            pool: self.pool.key(),
+            mint_x: self.mint_x.key(),
+            mint_y: self.mint_y.key(),
+            lp_mint: self.mint_lp.key(),
+            base_fee,
+            authority,
         });
         Ok(())
     }

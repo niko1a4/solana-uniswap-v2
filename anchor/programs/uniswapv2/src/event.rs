@@ -27,3 +27,13 @@ pub struct SwapEvent {
     pub amount_in: u64,
     pub amount_out: u64,
 }
+
+#[event]
+pub struct InitializePoolEvent {
+    pub pool: Pubkey,
+    pub mint_x: Pubkey,
+    pub mint_y: Pubkey,
+    pub lp_mint: Pubkey,
+    pub base_fee: u16,
+    pub authority: Option<Pubkey>,
+}

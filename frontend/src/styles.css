@@ -1,0 +1,43 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background: #0b0b0b;
+    color: #f3f3f3;
+    margin: 0;
+    padding: 0;
+}
+
+input,
+button {
+    margin: 5px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: none;
+}
+
+button {
+    background: #1d1d1d;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #333;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    background: #121212;
+    padding: 10px;
+}
+
+.navbar a {
+    color: #f3f3f3;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.navbar a:hover {
+    color: #aaa;
+}
